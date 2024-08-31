@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Belajar Javascript</title>
+</head>
+<body>
+   <h1>Array</h1>
+   <div id="mhs1"></div>
+   <div id="mhs2"></div>
+
+   <script>
+      //array
+      const mhs1 = ["Andi", "Informatika", "FSM"];
+      document.write(mhs1[0] + "<br>");
+      document.write(typeof(mhs1) + "<br>");
+      document.write(Array.isArray(mhs1) + "<br>");
+      document.getElementById("mhs1").innerHTML = mhs1 instanceof Array;
+
+      //object
+      const mhs2 = {name: "Andi", major: "Informatika", faculty: "FSM"};
+      document.write(mhs2.name + "<br>");
+      document.write(typeof(mhs2) + "<br>");
+      document.write(Array.isArray(mhs2) + "<br>");
+      document.getElementById("mhs2").innerHTML = mhs2 instanceof Array;
+   </script>
+</body>
+</html>

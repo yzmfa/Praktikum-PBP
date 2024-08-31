@@ -1,0 +1,24 @@
+<!-- Penulisan kode Javascript secara internal di dalam tag <head> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Belajar Javascript</title>
+   <script>
+   function view_alert() {
+      alert("Welcome " + document.getElementById("nama").value);
+   }
+   </script>
+   
+</head>
+
+<body>
+   <h2>HTML DOM Event</h2>
+   <p>Tuliskan Nama Anda</p>
+   <form action="">
+      <input type="text" id="nama">
+   </form>
+   <button type="button" onclick="view_alert()">Alert</button>
+</body>
+</html>

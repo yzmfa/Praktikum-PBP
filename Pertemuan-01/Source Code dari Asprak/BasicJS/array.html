@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Belajar Javascript</title>
+</head>
+<body>
+   <h1>Array</h1>
+
+   <script>
+      //cerate an array
+      const fruits = ["apple", "banana", "cherry","orange"];
+
+      //reasign element
+      fruits[1] = "lemon";
+      fruits[fruits.length-1] = "mango";
+
+      //add new element
+      fruits.push("grape");
+
+      //create an array using new Array
+      const foods = new Array("bread", "noodles", "cake");
+
+      //looping an array using index
+      for (let i = 0; i < fruits.length; i++) {
+         document.write(fruits[i] + "<br>");
+      }
+
+      //looping an array using foreach
+      fruits.forEach(display);
+
+      function display(value){
+         document.write(value + "<br>");
+      }
+
+      //looping an array using for of
+      for (const food of foods) {
+         document.write(food + "<br>");
+      }
+   </script>
+</body>
+</html>

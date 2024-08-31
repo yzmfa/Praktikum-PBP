@@ -1,0 +1,23 @@
+<!-- Nama     : Yusuf Zaenul Mustofa
+     NIM      : 24060122120021
+     Isi Kode : Mengakses elemen HTML menggunakan fungsi getElementByTagName(tag)
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Belajar Javascript</title>
+</head>
+<body>
+    <h2>Akses elemen menggunakan getElementByTagName</h2>
+    <p>Belajar JavaScript</p>
+    <p>Belajar Document Object Model</p>
+    <p id="demo"></p>
+
+    <script>
+        var x = document.getElementsByTagName("p");
+        document.getElementById("demo").innerHTML = "Isi teks[0] : "+x[0].innerHTML+"<br/>"+
+                                                    "Isi teks[1] : "+x[1].innerHTML;
+    </script>
+</body>
+</html>

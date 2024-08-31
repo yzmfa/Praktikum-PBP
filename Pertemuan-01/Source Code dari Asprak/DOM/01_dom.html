@@ -1,0 +1,20 @@
+<!-- Nama     : Yusuf Zaenul Mustofa
+     NIM      : 24060122120021
+     Isi Kode : Mengakses elemen HTML menggunakan fungsi getElementById(element)
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Belajar Javascript</title>
+</head>
+<body>
+    <h2>Akses elemen menggunakan getElementByID</h2>
+    <P id="content">Belajar Document Object Model</P>
+    <p id="demo"></p>
+    <script>
+        var x = document.getElementById("content");
+        document.getElementById("demo").innerHTML = "Isi teks : "+x.innerHTML;
+    </script>
+</body>
+</html>

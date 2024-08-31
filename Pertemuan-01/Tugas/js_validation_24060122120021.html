@@ -1,0 +1,185 @@
+<!-- Nama File  : js_validation_24060122120021 -->
+<!-- Deskripsi  : Form Tambah Data Produk dengan berbagai validasi -->
+<!-- Nama/NIM   : Yusuf Zaenul Mustofa/24060122120021 -->
+<!-- Tanggal    : 1 September 2024 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Data Produk</title>
+
+    <script>
+        function validateForm(){
+            let namaProduk = document.forms["produkForm"]["namaProduk"].value;
+            let deskripsi = document.forms["produkForm"]["deskripsi"].value;
+            let kategori = document.forms["produkForm"]["kategori"].value;
+            let subKategori = document.forms["produkForm"]["subKategori"].value;
+            let hargaSatuan = document.forms["produkForm"]["hargaSatuan"].value;
+            let grosir = document.forms["produkForm"]["grosir"].value;
+            let hargaGrosir = document.forms["produkForm"]["hargaGrosir"].value;
+            let jasaKirim = document.forms["produkForm"]["jasaKirim"];
+            let selectedJasaKirim = [];
+            for (let i = 0; i < jasaKirim.length; i++) {
+                if (jasaKirim[i].checked) {
+                    selectedJasaKirim.push(jasaKirim[i].value);
+                }
+            }
+            let inputCaptcha = document.forms["produkForm"]["inputCaptcha"].value;
+            let captcha = document.getElementById('captcha').value;
+
+            if (namaProduk == "" || namaProduk.length < 5 || namaProduk.length > 30){
+                alert("Nama Produk Harus Diisi 5-30 Karakter");
+                return false;
+            }
+
+            if (deskripsi == "" || deskripsi.length < 5 || deskripsi.length > 100){
+                alert("Deskripsi Harus Diisi 5-100 Karakter");
+                return false;
+            }
+
+            if (kategori == ""){
+                alert("Kategori Harus Dipilih");
+                return false;
+            }
+
+            if (subKategori == ""){
+                alert("Sub Kategori Harus Dipilih Sesuai Kategori");
+                return false;
+            }
+
+            if (hargaSatuan == "" || isNaN(hargaSatuan)){
+                alert("Harga Satuan Harus Diisi Dengan Nilai Numerik");
+                return false;
+            }
+
+            if (grosir == "Ya" && (isNaN(hargaGrosir) || hargaGrosir == "")){
+                alert("Harga Grosir Harus Diisi Dengan Nilai Numerik Jika Grosir Dipilih Ya");
+                return false;
+            }
+
+            if (selectedJasaKirim.length < 3){
+                alert("Jasa Kirim Harus Dipilih Minimal 3");
+                return false;
+            }
+
+            if (inputCaptcha != captcha){
+                alert("Captcha Tidak Sesuai");
+                return false;
+            }
+
+        }
+
+        function updateSubKategori(){
+            const kategori = document.forms["produkForm"]["kategori"].value;
+            const subKategori = document.forms["produkForm"]["subKategori"];
+
+            subKategori.options.length = 1
+
+            if (kategori === "Baju") {
+                subKategori.options[1] = new Option("Baju Pria", "Baju Pria");
+                subKategori.options[2] = new Option("Baju Wanita", "Baju Wanita");
+                subKategori.options[3] = new Option("Baju Anak", "Baju Anak");
+            } else if (kategori === "Elektronik") {
+                subKategori.options[1] = new Option("Mesin Cuci", "Mesin Cuci");
+                subKategori.options[2] = new Option("Kulkas", "Kulkas");
+                subKategori.options[3] = new Option("AC", "AC");
+            } else if (kategori === "Alat Tulis") {
+                subKategori.options[1] = new Option("Kertas", "Kertas");
+                subKategori.options[2] = new Option("Map", "Map");
+                subKategori.options[3] = new Option("Pulpen", "Pulpen");
+            }
+        }
+
+        function generateCaptcha() {
+            let captcha = '';
+            for (let i = 0; i < 5; i++) {
+                const isUpperCase = Math.random() < 0.5;
+                if (isUpperCase) {
+                    captcha += String.fromCharCode(Math.floor(Math.random() * 26) + 65);
+                } else {
+                    captcha += String.fromCharCode(Math.floor(Math.random() * 26) + 97);
+                }
+            }
+            document.getElementById('captcha').value = captcha;
+        }
+
+    </script>
+</head>
+
+<body onload="generateCaptcha()">
+    <h2>Form Tambah Data Produk</h2>
+
+    <form name="produkForm" action="#" onsubmit="return validateForm()" method="post">
+        <table>
+            <tr>
+                <td><label>Nama Produk</label></td>
+                <td><input type="text" name="namaProduk"></td>
+            </tr>
+            <tr>
+                <td><label>Deskripsi</label></td>
+                <td><textarea name="deskripsi" rows="4" cols="20"></textarea></td>
+            </tr>
+            <tr>
+                <td><label>Kategori</label></td>
+                <td>
+                    <select name="kategori" onchange="updateSubKategori()">
+                        <option value="">--Pilih Kategori--</option>
+                        <option value="Baju">Baju</option>
+                        <option value="Elektronik">Elektronik</option>
+                        <option value="Alat Tulis">Alat Tulis</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Sub Kategori</label></td>
+                <td>
+                    <select name="subKategori">
+                        <option value="">--Pilih Sub Kategori--</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Harga Satuan</label></td>
+                <td><input type="text" name="hargaSatuan"></td>
+            </tr>
+            <tr>
+                <td><label>Grosir</label></td>
+                <td>
+                    <input type="radio" name="grosir" value="Ya">Ya <br>
+                    <input type="radio" name="grosir" value="Tidak">Tidak
+                </td>
+            </tr>
+            <tr>
+                <td><label>Harga Grosir</label></td>
+                <td><input type="text" name="hargaGrosir"></td>
+            </tr>
+            <tr>
+                <td><label>Jasa Kirim</label></td>
+                <td>
+                    <input type="checkbox" name="jasaKirim" value="JNE">JNE <br>
+                    <input type="checkbox" name="jasaKirim" value="TIKI">TIKI <br>
+                    <input type="checkbox" name="jasaKirim" value="SiCepat">SiCepat <br>
+                    <input type="checkbox" name="jasaKirim" value="Ninja Express">Ninja Express <br>
+                    <input type="checkbox" name="jasaKirim" value="Wahana">Wahana
+                </td>
+            </tr>
+            <tr>
+                <td><label>Captcha</label></td>
+                <td>
+                    <input type="text" id="captcha" size="7" disabled>
+                    <input type="text" name="inputCaptcha" size="7">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Submit">
+                    <input type="reset" value="Reset">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+</body>
+</html>

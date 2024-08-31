@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <title>Belajar Javascript</title>
+    </head>
+
+    <body>
+        <h1>Array</h1>
+        <script>
+            //create an Array
+            const fruits = ["apple","Banana","Cherry","Orange"]
+
+            //reassign element
+            fruits[1] = "lemon"
+            fruits[fruits.length-1]
+
+            //add new element
+            fruits.push("grape")
+
+            //create an array using new array
+            const foods = new Array("Bread","Noodle","cake");
+
+            //looping array using index
+            for (let i = 0;i<fruits.length; i++){
+                Document.write(fruits[i] + "<br>")
+            }
+
+            //looping array using foreach
+            fruits.foreach(display);
+
+            function display(value){
+                document.write(value + "<br>")
+            }
+            
+        </script>
+    </body>
+</html>

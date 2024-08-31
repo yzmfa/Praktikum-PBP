@@ -1,0 +1,36 @@
+<!-- Nama     : Yusuf Zaenul Mustofa
+     NIM      : 24060122120021
+     Isi Kode : Menambah atau menghapus elemen HTML
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Belajar Javascript</title>
+</head>
+<body>
+    <ul id="list_script">
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+    </ul>
+
+    <p>Add dan Remove Element List</p>
+    <button onclick="addList()">Add List Element</button>
+    <button onclick="removeList()">Remove List Element</button>
+
+    <script>
+        function addList(){
+            var li = document.createElement("LI");
+            var t = document.createTextNode("PHP");
+            li.appendChild(t);
+            //<li>PHP</li>
+            document.getElementById("list_script").appendChild(li);
+        }
+        function removeList(){
+            var list = document.getElementById("list_script");
+            list.removeChild(list.childNodes[1]);
+        }
+    </script>
+</body>
+</html>
