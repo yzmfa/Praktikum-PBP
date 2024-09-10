@@ -42,6 +42,7 @@
 
     // Variabel super global
     echo htmlentities($_SERVER["PHP_SELF"]); 
+    echo '<br />';
 
     // Konstanta
     define("PWI", "Permograman Web dan Internet "); 

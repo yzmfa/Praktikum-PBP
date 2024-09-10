@@ -5,7 +5,6 @@
        Tanggal  : 4 September 2024
     */
 
-    // For Loop
     $harga = 1000; 
     echo '<table border="1">'; 
     echo '<tr><td>No</td><td>Diskon</td><td>Harga Setelah Diskon</td></tr>'; 
@@ -19,9 +18,5 @@
         echo '</tr>'; 
     } 
     echo '</table>';
-
-    // While Loop (contoh belum ada, bisa disesuaikan dengan For Loop di atas)
-
-    // Do-While Loop (contoh belum ada, bisa disesuaikan dengan For Loop di atas)
 
 ?>
