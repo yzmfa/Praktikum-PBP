@@ -4,7 +4,7 @@
 <!-- Tanggal    : 11 September 2024 -->
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -15,8 +15,15 @@
 
 <body>
   <?php
+  function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+  }
+
   if (isset($_POST['submit'])) {
-    //validasi nama: tidak boleh kosong, hanya dapat berisi huruf dan spasi 
+    // Validasi nama: tidak boleh kosong, hanya dapat berisi huruf dan spasi
     $nama = test_input($_POST['nama']);
     if (empty($nama)) {
       $error_nama = "Nama harus diisi";
@@ -24,132 +31,121 @@
       $error_nama = "Nama hanya dapat berisi huruf dan spasi";
     }
 
-    //validasi email: tidak boleh kosong, format harus benar
+    // Validasi email: tidak boleh kosong, format harus benar
     $email = test_input($_POST['email']);
-    if ($email == '') {
+    if (empty($email)) {
       $error_email = "Email harus diisi";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
       $error_email = "Format email tidak benar";
     }
 
-    //validasi alamat: tidak boleh kosong
+    // Validasi alamat: tidak boleh kosong
     $alamat = test_input($_POST['alamat']);
-    if ($alamat == '') {
+    if (empty($alamat)) {
       $error_alamat = "Alamat harus diisi";
     }
-    //validasi jenis kelamin: tidak boleh kosong
+
+    // Validasi jenis kelamin: tidak boleh kosong
     if (!isset($_POST['jenis_kelamin'])) {
       $error_jenis_kelamin = "Jenis kelamin harus diisi";
     }
-    //validasi kota: tidak boleh kosong
+
+    // Validasi kota: tidak boleh kosong
     if (!isset($_POST['kota'])) {
       $error_kota = "Kota harus diisi";
     }
-    //validasi minat: tidak boleh kosong
+
+    // Validasi minat: tidak boleh kosong
     if (!isset($_POST['minat'])) {
       $error_minat = "Minat harus diisi";
     }
   }
-  function test_input($data)
-  {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-  }
-  if (isset($_POST['minat'])) {
-    $minat = $_POST['minat'];
-  }
   ?>
-  <div class="container"><br/>
+  
+  <div class="container"><br />
     <div class="card">
       <div class="card-header">Form Mahasiswa</div>
       <div class="card-body">
         <form method="POST" autocomplete="on" action>
           <div class="form-group">
             <label for="nama">Nama:</label>
-            <input type="text" class="form-control" id="nama" name="nama" maxlength="50" value="<?php if (isset($_POST['nama'])) echo $_POST['nama'] ?>">
-            <div class="error text-danger"><?php if (isset($error_nama)) echo $error_nama; ?></div>
+            <input type="text" class="form-control" id="nama" name="nama" maxlength="50" value="<?= isset($_POST['nama']) ? $_POST['nama'] : '' ?>">
+            <div class="text-danger"><?= isset($error_nama) ? $error_nama : '' ?></div>
           </div>
+
           <div class="form-group">
             <label for="email">Email:</label>
-            <input type="email" class="form-control" id="email" name="email" value="<?= (isset($_POST['email'])) ? $_POST['email'] : '' ?>">
-            <div class="error text-danger"><?php if (isset($error_email)) echo $error_email; ?></div>
+            <input type="email" class="form-control" id="email" name="email" value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>">
+            <div class="text-danger"><?= isset($error_email) ? $error_email : '' ?></div>
           </div>
+
           <div class="form-group">
             <label for="alamat">Alamat:</label>
-            <textarea class="form-control" id="alamat" name="alamat" rows="3"><?php if (isset($_POST['alamat'])) echo $_POST['alamat'] ?></textarea>
-            <div class="error text-danger"><?php if (isset($error_alamat)) echo $error_alamat; ?></div>
+            <textarea class="form-control" id="alamat" name="alamat" rows="3"><?= isset($_POST['alamat']) ? $_POST['alamat'] : '' ?></textarea>
+            <div class="text-danger"><?= isset($error_alamat) ? $error_alamat : '' ?></div>
           </div>
+
           <div class="form-group">
-            <label for="kota">Kota/ Kabupaten:</label>
+            <label for="kota">Kota/Kabupaten:</label>
             <select id="kota" name="kota" class="form-control">
-              <option value="" selected disabled>-- Pilih Kota/kabupaten --</option>
-              <option value="Semarang" <?php if (isset($_POST['kota'])) echo 'selected' ?>>Semarang</option>
-              <option value="Jakarta" <?php if (isset($_POST['kota'])) echo 'selected' ?>>Jakarta</option>
-              <option value="Bandung" <?php if (isset($_POST['kota'])) echo 'selected' ?>>Bandung</option>
-              <option value="Surabaya" <?php if (isset($_POST['kota'])) echo 'selected' ?>>Surabaya</option>
+              <option value="" selected disabled>-- Pilih Kota/Kabupaten --</option>
+              <option value="Semarang" <?= isset($_POST['kota']) && $_POST['kota'] == 'Semarang' ? 'selected' : '' ?>>Semarang</option>
+              <option value="Jakarta" <?= isset($_POST['kota']) && $_POST['kota'] == 'Jakarta' ? 'selected' : '' ?>>Jakarta</option>
+              <option value="Bandung" <?= isset($_POST['kota']) && $_POST['kota'] == 'Bandung' ? 'selected' : '' ?>>Bandung</option>
+              <option value="Surabaya" <?= isset($_POST['kota']) && $_POST['kota'] == 'Surabaya' ? 'selected' : '' ?>>Surabaya</option>
             </select>
-            <div class="error text-danger"><?php if (isset($error_kota)) echo $error_kota; ?></div>
+            <div class="text-danger"><?= isset($error_kota) ? $error_kota : '' ?></div>
           </div>
 
           <label>Jenis Kelamin:</label>
           <div class="form-check">
-            <label class="form-check-label">
-              <input type="radio" class="form-check-input" <?php if (isset($_POST['jenis_kelamin']) && $_POST['jenis_kelamin'] == 'pria') echo 'checked' ?> name="jenis_kelamin" value="pria">Pria
-            </label>
-            <div class="error text-danger"><?php if (isset($error_jenis_kelamin)) echo $error_jenis_kelamin; ?></div>
+            <input type="radio" class="form-check-input" name="jenis_kelamin" value="pria" <?= isset($_POST['jenis_kelamin']) && $_POST['jenis_kelamin'] == 'pria' ? 'checked' : '' ?>> Pria
+            <div class="text-danger"><?= isset($error_jenis_kelamin) ? $error_jenis_kelamin : '' ?></div>
           </div>
           <div class="form-check">
-            <label class="form-check-label">
-              <input type="radio" class="form-check-input" name="jenis_kelamin" value="wanita" <?php if (isset($_POST['jenis_kelamin']) && $_POST['jenis_kelamin'] == 'wanita') echo 'checked' ?> name="jenis_kelamin" value="pria">Wanita
-            </label>
-            <div class="error text-danger"><?php if (isset($error_jenis_kelamin)) echo $error_jenis_kelamin; ?></div>
+            <input type="radio" class="form-check-input" name="jenis_kelamin" value="wanita" <?= isset($_POST['jenis_kelamin']) && $_POST['jenis_kelamin'] == 'wanita' ? 'checked' : '' ?>> Wanita
+            <div class="text-danger"><?= isset($error_jenis_kelamin) ? $error_jenis_kelamin : '' ?></div>
           </div>
+          
           <br>
           <label>Peminatan:</label>
           <div class="form-check">
-            <label class="form-check-label">
-              <input type="checkbox" class="form-check-input" name="minat[]" value="coding" <?php if (isset($_POST['minat']) && in_array('coding', $_POST['minat'])) echo 'checked' ?>>coding
-            </label>
-            <div class="error text-danger"><?php if (isset($error_minat)) echo $error_minat; ?></div>
+            <input type="checkbox" class="form-check-input" name="minat[]" value="coding" <?= isset($_POST['minat']) && in_array('coding', $_POST['minat']) ? 'checked' : '' ?>> Coding
+            <div class="text-danger"><?= isset($error_minat) ? $error_minat : '' ?></div>
           </div>
           <div class="form-check">
-            <label class="form-check-label">
-              <input <?php if (isset($_POST['minat']) && in_array('ux_design', $_POST['minat'])) echo 'checked' ?> type="checkbox" class="form-check-input" name="minat[]" value="ux_design">UX Design
-            </label>
-            <div class="error text-danger"><?php if (isset($error_minat)) echo $error_minat; ?></div>
+            <input type="checkbox" class="form-check-input" name="minat[]" value="ux_design" <?= isset($_POST['minat']) && in_array('ux_design', $_POST['minat']) ? 'checked' : '' ?>> UX Design
+            <div class="text-danger"><?= isset($error_minat) ? $error_minat : '' ?></div>
           </div>
           <div class="form-check">
-            <label class="form-check-label">
-              <input <?php if (isset($_POST['minat']) && in_array('data_science', $_POST['minat'])) echo 'checked' ?> type="checkbox" class="form-check-input" name="minat[]" value="data_science">Data Science
-            </label>
-            <div class="error text-danger"><?php if (isset($error_minat)) echo $error_minat; ?></div>
+            <input type="checkbox" class="form-check-input" name="minat[]" value="data_science" <?= isset($_POST['minat']) && in_array('data_science', $_POST['minat']) ? 'checked' : '' ?>> Data Science
+            <div class="text-danger"><?= isset($error_minat) ? $error_minat : '' ?></div>
           </div>
+          
           <br>
-
-          <button type="submit" class="btn btn-primary" name="submit" value="submit">submit
-          </button>
+          <button type="submit" class="btn btn-primary" name="submit" value="submit">Submit</button>
           <button type="reset" class="btn btn-danger">Reset</button>
         </form>
       </div>
 
       <?php
-      if (isset($_POST["submit"]) && isset($_POST["nama"]) && isset($_POST["email"]) && isset($_POST["alamat"]) && isset($_POST["jenis_kelamin"]) && isset($_POST["kota"]) && isset($_POST["minat"])) {
+      if (isset($_POST['submit'])) {
         echo "<h3>Your Input:</h3>";
-        echo 'Nama = ' . $_POST['nama'] . '<br />';
-        echo 'Email = ' . $_POST['email'] . '<br />';
-        echo 'Kota = ' . $_POST['kota'] . '<br />';
-        echo 'Jenis Kelamin = ' . $_POST['jenis_kelamin'] . '<br />';
+        echo "Nama: " . $_POST['nama'] . "<br>";
+        echo "Email: " . $_POST['email'] . "<br>";
+        echo "Kota: " . $_POST['kota'] . "<br>";
+        echo "Jenis Kelamin: " . $_POST['jenis_kelamin'] . "<br>";
 
-        $minat = $_POST['minat'];
-        if (!empty($minat)) {
-          echo 'Permintaan yang dipilih: ';
-          foreach ($minat as $minat_item) {
-            echo '<br />' . $minat_item;
+        if (!empty($_POST['minat'])) {
+          echo "Minat yang dipilih: <br>";
+          foreach ($_POST['minat'] as $minat_item) {
+            echo "- " . $minat_item . "<br>";
           }
         }
       }
       ?>
+    </div>
+  </div>
+</body>
 
 </html>

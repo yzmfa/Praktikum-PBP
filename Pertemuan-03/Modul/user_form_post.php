@@ -65,7 +65,6 @@
             </label>
           </div>
           <br>
-          <!-- submit, reset dan button -->
           <button type="submit" class="btn btn-primary" name="submit" value="submit">Submit</button>
           <button type="reset" class="btn btn-danger">Reset</button>
         </form>
@@ -89,6 +88,8 @@
         }
         ?>
       </div>
+    </div>
+  </div>
 </body>
 
 </html>
