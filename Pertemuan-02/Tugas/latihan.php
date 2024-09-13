@@ -28,5 +28,6 @@
         echo '<td>'.hitung_rata($nilai).'</td>';
         echo '</tr>';
     }
+    
     echo '</table>';
 ?>
